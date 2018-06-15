@@ -1,37 +1,18 @@
-import {
-  fetchCompleteAction,
-  minusAction,
-  plusAction
-} from "./reducers/counterReducer.js";
-import { api } from "./api";
+import { minus, plus, fetch } from "./thunk";
 
 export default class App {
   constructor({ dispatch }) {
     this.dispatch = dispatch;
 
     document.getElementById("plus").addEventListener("click", () => {
-      this.dispatch(plusAction());
-
-      this.requestApi();
+      dispatch(plus());
     });
 
     document.getElementById("minus").addEventListener("click", () => {
-      this.dispatch(minusAction());
-
-      this.requestApi();
+      dispatch(minus());
     });
 
-    this.requestApi();
-  }
-
-  async requestApi() {
-    const repos = await api();
-
-    this.dispatch(
-      fetchCompleteAction({
-        list: repos
-      })
-    );
+    dispatch(fetch());
   }
 
   render(state) {

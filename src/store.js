@@ -1,9 +1,9 @@
-const { createStore, applyMiddleware, compose } = window.Redux;
-
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
 import createReducer from "./reducers";
 
 export default function configureStore(initialState = {}) {
-  const middlewares = [];
+  const middlewares = [thunk];
 
   const enhancers = [applyMiddleware(...middlewares)];
 

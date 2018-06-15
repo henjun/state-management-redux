@@ -1,10 +1,10 @@
 import { createAction } from "../utils";
 
-const PLUS = "PLUS";
-const MINUS = "MINUS";
-const FETCH = "FETCH";
-const FETCH_COMPLETE = "FETCH_COMPLETE";
-const FETCH_FAIL = "FETCH_FAIL";
+export const PLUS = "PLUS";
+export const MINUS = "MINUS";
+export const FETCH = "FETCH";
+export const FETCH_COMPLETE = "FETCH_COMPLETE";
+export const FETCH_FAIL = "FETCH_FAIL";
 
 export const [
   plusAction,

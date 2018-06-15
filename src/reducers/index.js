@@ -1,5 +1,5 @@
-const { combineReducers } = window.Redux;
-import counterReducer from "./counterReducer.js";
+import { combineReducers } from "redux";
+import counterReducer from "./counterReducer";
 
 const createReducer = () =>
   combineReducers({

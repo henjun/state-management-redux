@@ -1,0 +1,23 @@
+{
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": [
+          "last 2 versions"
+        ]
+      },
+      "loose": false,
+      "modules": false,
+      "useBuiltIns": false,
+      "include": [],
+      "exclude": [
+        "transform-es2015-for-of",
+        "transform-regenerator",
+        "transform-async-to-generator"
+      ]
+    }]
+  ],
+  "plugins": [
+    "transform-object-rest-spread"
+  ]
+}

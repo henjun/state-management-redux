@@ -33,11 +33,10 @@ export default function counterReducer(state = INIT_STATE, action) {
       };
     case FETCH_COMPLETE:
       const { list } = action.payload;
-      const { count } = state;
 
       return {
         ...state,
-        list: list.slice(0, count)
+        list
       };
     default:
       return state;

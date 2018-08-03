@@ -1,21 +1,16 @@
-import { fetch } from "./thunk";
-import { minusAction, plusAction } from "./reducers/counterReducer";
-import { FETCH } from "./reducers/counterReducer";
 export default class App {
-  constructor({ dispatch, store }) {
-    this.dispatch = dispatch;
-
+  constructor({ store }) {
     document.getElementById("plus").addEventListener("click", () => {
-      dispatch(plusAction());
-      dispatch({ type: FETCH, count: store.getState().counter.count });
+      store.inc();
+      store.fetch();
     });
 
     document.getElementById("minus").addEventListener("click", () => {
-      dispatch(minusAction());
-      dispatch({ type: FETCH, count: store.getState().counter.count });
+      store.dec();
+      store.fetch();
     });
 
-    dispatch({ type: FETCH, count: 5 });
+    store.fetch();
   }
 
   render(state) {

@@ -1,10 +1,12 @@
-import configureStore from "./src/store.js";
+import { autorun } from "mobx";
+import CounterStore from "./src/mobx/store";
 import App from "./src/app.js";
 
-const store = configureStore({ counter: { count: 5, list: [] } });
+const store = new CounterStore();
+// ({ count: 5, list: [] });
 
-const app = new App({ dispatch: store.dispatch, store: store });
+const app = new App({ store });
 
-store.subscribe(() => {
-  app.render(store.getState().counter);
+autorun(() => {
+  app.render(store);
 });

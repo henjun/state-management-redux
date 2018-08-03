@@ -8,16 +8,17 @@
       },
       "loose": false,
       "modules": false,
-      "useBuiltIns": false,
+      "useBuiltIns": true,
       "include": [],
       "exclude": [
-        "transform-es2015-for-of",
         "transform-regenerator",
         "transform-async-to-generator"
       ]
     }]
   ],
   "plugins": [
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    "transform-decorators-legacy",
+    "transform-class-properties"
   ]
 }

@@ -13,7 +13,7 @@ import rootEpic from "./epic";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default function configureStore(initialState = {}) {
-  const middlewares = [epicMiddleware];
+  const middlewares = [];
 
   const enhancers = [applyMiddleware(...middlewares)];
 
@@ -23,7 +23,7 @@ export default function configureStore(initialState = {}) {
     composeEnhancers(...enhancers)
   );
 
-  epicMiddleware.run(rootEpic);
+  // epicMiddleware.run(rootEpic);
   // sagaMiddleware.run(rootSaga);
 
   return store;

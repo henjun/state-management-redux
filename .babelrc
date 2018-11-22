@@ -18,7 +18,18 @@
   ],
   "env": {
     "test": {
-      "presets": [["env"]]
+      "presets": [["env", {
+        "targets": {
+          "browsers": [
+            "last 2 versions"
+          ]
+        },
+        "include": [],
+        "exclude": [
+          "transform-regenerator",
+          "transform-async-to-generator"
+        ]
+      } ]]
     }
   },
   "plugins": [

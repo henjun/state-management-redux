@@ -1,4 +1,4 @@
-import {api} from './api';
+import { api } from './api';
 
 import {
   plusAction,
@@ -8,20 +8,28 @@ import {
 
 export default class App {
   constructor(store) {
+    this.store = store;
+  }
+
+  initListener(){
     document.getElementById("plus").addEventListener("click", () => {
-      store.dispatch(plusAction());
+      console.log('213')
+      this.store.dispatch(plusAction());
     });
 
     document.getElementById("minus").addEventListener("click", () => {
-      store.dispatch(minusAction());
+      this.store.dispatch(minusAction());
     });
+  }
 
-    api().then((result) => {
-      store.dispatch(fetchCompleteAction({ list: result }));
-    })
+  fetchList() {
+    return api().then((result) => {
+      this.store.dispatch(fetchCompleteAction({ list: result }));
+    });
   }
 
   render(state) {
+    console.log(state);
     const { count, list } = state.counter;
 
     document.getElementById("counter").innerText = count;

@@ -3,6 +3,7 @@
 
 import configureStore from './src/store';
 import App from "./src/app.js";
+// import { appendFileSync } from 'fs';
 
 // const store = new CounterStore();
 // ({ count: 5, list: [] });
@@ -10,10 +11,13 @@ import App from "./src/app.js";
 const store = configureStore();
 
 const app = new App(store);
-
-store.subscribe(() => {
-  app.render(store.getState());
-})
+app.initListener();
+app.fetchList()
+  .then(() => {
+    store.subscribe(() => {
+      app.render(store.getState());
+    })
+  })
 
 // autorun(() => {
 //   app.render(store);

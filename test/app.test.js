@@ -4,21 +4,9 @@ import puppeteer from 'puppeteer';
 import fetch from 'node-fetch';
 import $ from 'jQuery';
 let store, app;
-beforeEach(() => {
+beforeEach(async () => {
 	store = configureStore({});
 	app = new App(store);
-});
-
-global.fetch = fetch;
-
-test('app test', () => {
-	return app.fetchList().then(() => {
-		expect(store.getState().counter.list.length).toBeGreaterThan(0);
-	})
-});
-
-
-test('plus click', () => {
 	document.body.innerHTML = `
 		<div>
 			<h1 id="counter"></h1>
@@ -31,22 +19,54 @@ test('plus click', () => {
 
 		</ul>
 	`;
-	app.initListener();
-
 	store.subscribe(() => {
-		console.log(123)
 		app.render(store.getState());
-	})
+	});
+	await app.fetchList();
+	app.initListener();
+});
 
+global.fetch = fetch;
 
-	// this.store.dispatch(minusAction()); 
-
-	// jest.mock('..');
-	// store.dispatch.mockImplementation(cb => {
-	// 	cb({});
-	// });
+test('plus click', () => {
 	$("#plus").click();
 
-	expect(document.getElementById("counter").innerText).toEqual(1);
-
+	const count = document.querySelector("#counter").innerText;
+	const listCount = document.querySelectorAll("li").length;
+	expect({
+		count,
+		listCount
+	}).toEqual({
+		count: 1,
+		listCount:1
+	})
 })
+
+test('minus click', () => {
+	$("#minus").click();
+	const count = document.querySelector("#counter").innerText;
+	const listCount = document.querySelectorAll("li").length;
+	expect({
+		count,
+		listCount
+	}).toEqual({
+		count: 0,
+		listCount: 0,
+	})
+})
+
+test('plus and minus click test', () => {
+	$("#plus").click();
+	$("#plus").click();
+	$("#minus").click();
+	const count = document.querySelector("#counter").innerText;
+	const listCount = document.querySelectorAll("li").length;
+	expect({
+		count,
+		listCount
+	}).toEqual({
+		count: 1,
+		listCount: 1,
+	})
+})
+

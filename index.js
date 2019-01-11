@@ -7,17 +7,21 @@ import App from "./src/app.js";
 
 // const store = new CounterStore();
 // ({ count: 5, list: [] });
+(async () => {
+  const store = configureStore();
 
-const store = configureStore();
+  const app = new App(store);
+  
+  // 비동기로 데이터가 그려지는 부분.
+  store.subscribe(() => {
+    app.render(store.getState());
+  });
+  
+  await app.fetchList();
+  app.initListener();
+})();
 
-const app = new App(store);
-app.initListener();
-app.fetchList()
-  .then(() => {
-    store.subscribe(() => {
-      app.render(store.getState());
-    })
-  })
+
 
 // autorun(() => {
 //   app.render(store);

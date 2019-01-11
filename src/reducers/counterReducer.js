@@ -29,7 +29,7 @@ export default function counterReducer(state = INIT_STATE, action) {
     case MINUS:
       return {
         ...state,
-        count: state.count - 1
+        count: state.count > 0 ? state.count - 1 : 0
       };
     case FETCH_COMPLETE:
       const { list } = action.payload;

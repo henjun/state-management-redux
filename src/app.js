@@ -13,7 +13,7 @@ export default class App {
 
   initListener(){
     document.getElementById("plus").addEventListener("click", () => {
-      console.log('213')
+      console.log('click')
       this.store.dispatch(plusAction());
     });
 
@@ -25,13 +25,14 @@ export default class App {
   fetchList() {
     return api().then((result) => {
       this.store.dispatch(fetchCompleteAction({ list: result }));
-    });
+    }, e => {
+      console.log(e);
+    })
   }
 
   render(state) {
-    console.log(state);
     const { count, list } = state.counter;
-
+    
     document.getElementById("counter").innerText = count;
     document.getElementById("repos").innerHTML = list.slice(0, count)
       .map(item => `<li><a href="${item.html_url}">${item.full_name}</a></li>`)
